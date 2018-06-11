@@ -79,26 +79,81 @@ Then used coolors.com.
 - Beetle Outbreak Aerial Survey data from **[Data BC](https://data.gov.bc.ca/)**
 - Landsat Data from the USGS processed in Google Earth Engine
 - Photographs: from field data by Anna Talucci
+- Favicon: a combination of fab fa-gripfire and fas fa-bug that were acquired from https://fontawesome.com/icons
 - Tree Species data from the Vegetation Resource Inventory acquired from **[Data BC](https://data.gov.bc.ca/)**
 - Fire perimeters and Provincial Parks Boundaries acquired from **[Data BC](https://data.gov.bc.ca/)**
-
-
-
-### Favicon
-
-Acquired from ...
-
 
 
 
 
 ### Applied Libraries
 
+We used a variety of existing libraries including style sheets and scripts
+
+Style sheets: 
+
+```html
+<!--add required stylesheets-->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--boostrap-->
+
+<!--leaflet css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+<link rel="stylesheet" href="https://turban.github.io/Leaflet.Photo/examples/lib/cluster/MarkerCluster.css" />
+<link rel="stylesheet" href="https://turban.github.io/Leaflet.Photo/Leaflet.Photo.css" />
+
+
+
+<!--Fonts-->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/storymap.2.4.css">
+```
+
+Scripts:
+
+```html
+<!--Scripts-->
+<!--add required libraries-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+<!--jquery-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!--boostrap-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<script src="js/leaflet.markercluster-src.js"></script>
+<script src="https://turban.github.io/Leaflet.Photo/Leaflet.Photo.js"></script>
+
+
+<!--leaflet.ajax for asynchronously adding geojson data-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+<!--story map plugin-->
+<script src="js/storymap.2.4.js"></script>
+
+<script src="js/data.js"></script>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+```
+
 
 
 ### Credits
 
-End Page Photograph courtesy of Theodore Temperli.
+-  Geographic Data: Fire Perimeters, Outbreak Severity, Provincial Parks acquired from **[https://data.gov.bc.ca/](Data BC)**
+- Remote Sensing Data: Landsat Data from <a href="https://landsat.usgs.gov/">USGS</a> and processed in **[https://earthengine.google.com/](Google Earth Engine)**
+- Context: Peer reviewed research, field work, and analyses
+- Photos: Theodore Temperli, Anna Talucci
+- Favicon: a combination of fab fa-gripfire and fas fa-bug that were acquired from https://fontawesome.com/icons
+- Graph data: Wulder et al. 2009
+- Video: Adobe Spark Software used to produce Launch Page photo slide show
 
 
 
