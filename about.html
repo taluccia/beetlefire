@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dead forest burning</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="img/carticon2.ico" type="image/x-icon">
+
+    <!--meta data for sharing links on Facebook-->
+    <meta property="og:title" content="Dead forests burning"/>
+    <!--<meta property="og:url" content=""/>-->
+    <meta property="og:description" content="Practice generating a story map."/>
+    <meta property="og:image" content="img/social.png"/>
+
+    <!--add required stylesheets-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--boostrap-->
+
+    <!--leaflet css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <link rel="stylesheet" href="https://turban.github.io/Leaflet.Photo/examples/lib/cluster/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://turban.github.io/Leaflet.Photo/Leaflet.Photo.css" />
+
+
+
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/storymap.2.4.css">
+
+
+
+
+    <!--Scripts-->
+    <!--add required libraries-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+    <!--jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--boostrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    http://turban.github.io/Leaflet.Photo/examples/lib/cluster/leaflet.markercluster.js
+    <script src="js/leaflet.markercluster-src.js"></script>
+    <script src="https://turban.github.io/Leaflet.Photo/Leaflet.Photo.js"></script>
+
+
+    <!--leaflet.ajax for asynchronously adding geojson data-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+    <!--story map plugin-->
+    <script src="js/storymap.2.4.js"></script>
+
+    <!-- mini globle map -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+    <!--<script src="js/globeminimap.js"></script>-->
+    <script src="js/data.js"></script>
+
+
+    <style> h2 {
+        padding-bottom: 15px
+    }
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark storymap-navbar">
+    <a class="navbar-brand" href="index.html">
+        <img src="img/carticon2.ico" width="100%" class="inline-block">
+        <!--convert the style value to a class and then add the class to the css file.-->
+        <!--<img src="img/logo.png" class="d-inline-block align-top">-->
+        <b>Dead Forests Burning</b>
+    </a>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+        <!--Create class ml-auto for the navbar items you want on the right.-->
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-link" >
+                <a style = "color: white" href="index.html" target="_blank"><b>Story Map</b></a>
+            </li>
+            <li class="nav-link" >
+                <a style = "color: white" href="about.html" target="_blank"><b>About</b></a>
+            </li>
+            <li class="nav-link">
+                <a class="fab fa-facebook-square" style = "color: gray" href="https://facebook.com/sharer.php?u=https://taluccia.github.io/" target="_blank"></a>
+            </li>
+            <li class="nav-link">
+                <a class="fab fa-github" style = "color: gray" href="https://taluccia.github.io/" style="top:40px" target="_blank" ></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <!--<div class="row">-->
+        <!--<div class="col-lg-12">-->
+            <!--<br><br><h1 class="page-header"></h1>-->
+            <!--<ol class="breadcrumb">-->
+                <!--<b><li><a href="index.html"><font size="6px">Go to the Storymap</font></a></b></li>-->
+                <!--&lt;!&ndash; <b><li class="active">About</li></b>&ndash;&gt;-->
+            <!--</ol>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!-- /.row -->
+
+
+
+    <!-- Intro Content -->
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="h2_about">Project Summary</h2>
+            <p style="text-align:justify">
+                This is a web map of lodgepole pine forest in transition with an overview of outbreak severity, burn severity,
+                and forest recovery for a section of the landscape in central interior British Columbia. Forests have
+                experienced unprecedented mortality from the recent mountain pine beetle outbreak and
+                subsequently burned during wildfire. Land managers have been concerned about dead forest conditions
+                and the influence dead forests may have on fire behavior and forest resiliency. This project is an overview
+                of a large dissertation project. The composition of this site serves as a final project for class:
+                Geovisualization provided by Oregon State University.</p>
+
+            <p style="text-align:justify">
+                The main goals of this project were to visualize various aspects of a landscape in transition.
+                We integrated a variety of mediums including maps, photographs, satellite imagery, graphs, and words
+                to describe the story that is occurring across the landscapes that are transitioning through sequential
+                disturbances of beetle outbreak and wildfire in central interior British Columbia, Canada </p>
+
+        </div>
+        <div class="col-md-6">
+            <div class="image" style="padding-top: 22px">
+                <img class="img-responsive" src="img/aerialphotosm1.png" alt="">
+                <div><i>Postfire burn mosaic: after sequential disturbances of beetle outbreak and wildfire. Photo by Anna Talucci.</i></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <h2 class="h2_about">Background</h2>
+    <p style="text-align:justify">
+        This project is portion of a larger dissertation project that is seeking to to determine the influence
+        of sequential disturbances of beetle outbreak and wildfire on fire severity and forest regeneration.
+        The larger project takes a 2 pronged approach to examine these questions through empirical field based
+        methods and through the lens of remotely sensed Landsat data analyses.</p>
+    <p style="text-align:justify">
+        Beetle outbreaks and wildfire are broad scale disturbances that influence forest regeneration and successional
+        processes. Understanding how these broad-scale disturbance agents operate across landscapes is enhanced using
+        remotely sensed satellite data that allow researchers to evaluate disturbance at a broad-scale. The magnitude of
+        the mountain pine beetle (Dendroctonus ponderosae; hereafter beetle) outbreak in central interior British Columbia,
+        Canada has been unprecedented, affecting millions of hectares of lodgepole pine (Pinus contorta var. latifolia)
+        forests (Wulder et al. 2006). Recent fires have burned through gray-phase outbreak conditions in 2012, 2013, and
+        2014 in two Provincial Parks that are managed as wilderness areas. When forest killed by the beetle outbreak
+        subsequently burn during a wildfire, the collections of dead snags alter fire severity and seedbank availability,
+        which in turn can influence forest recovery.</p> <br/>
+
+
+    <div class="image" align="center" style="padding-top: 22px">
+        <img class="img-responsive" src="img/pano1xsm.png" alt="">
+        <div align="center"><i>10 years postfire recovery. Photo by Anna Talucci.</i></div>
+    </div>
+    <br/>
+    <!--Methods content-->
+    <h2 class="h2_about">Methods</h2>
+
+    <p style="...; text-align: justify">
+        The purpose of this story map was to visualize various aspects of forest composition and structure through time
+        to describe current disturbances for a research area. Aspects of this website are a product of remotes sensing
+        analyses performed in Google Earth Engine and elaborated on below. </p>
+
+    <p style="...; text-align: justify">
+        We used imagery from Landsat 5, 7, and 8, from 1997 through 2017 surface reflectance (Key and Benson 2006) and
+        focused on growing season months, May through September. The Landsat series was harmonized following the calibration
+        data from Roy et al (2016), which allowed us to work seamlessly across the Landsat imagery for all analyses.
+        We generated a normalized burn ratio (NBR) band for each Landsat image in our series. We generated a cloud mask to
+        minimize the effect of pixels covered by clouds. We performed an additional visual assessment for clouds and scan
+        lines for imagery used outside of the time series.</p>
+    <p style="...; text-align: justify">
+        Characterizing forest health and trends in disturbance are critical for both management and tracking forest recovery.
+        Trends in forest health can be characterized well using the normalized burn ratio (NBR), which is well documented
+        (Coops et al. 2006, Meigs et al. 2011, Kennedy et al. 2012, Pickell et al. 2016, White et al. 2017,
+        Frazier et al. 2018). Research has primarily focused on detecting and evaluating singular broad-scale disturbance
+        agents such as insect outbreaks, wildfires, and timber harvest (Coops et al. 2006, Kennedy et al. 2012, White et al.
+        2017, Frazier et al. 2018). These research approaches have been demonstrated as robust means of evaluating
+        broad-scale disturbances such as insect outbreaks and wildfire. Effects of sequential disturbances of beetle
+        outbreak and wildfire have yet to be evaluated in the central interior. Our broad overarching question is, what
+        effect do beetle outbreak conditions have on fire severity and regeneration at landscape scales? The goal of this
+        project is to conduct exploratory research on a single fire event that burned through beetle outbreak affected
+        forests in the region. Our objectives are twofold: first to generate a time series for the region showing the
+        decline in forest health from the outbreak followed by subsequent fire and a brief snapshot of recovery
+        (Meigs et al. 2011, Kennedy et al. 2012). Second, to develop a series of disturbance and regrowth maps to
+        characterize the amount of change (Kennedy et al. 2012, White et al. 2017, Frazier et al. 2018).</p>
+    <p style="...; text-align: justify">
+
+        We used the time series analysis to determine changes in forest health and condition associated with the regional
+        beetle outbreak, wildfire, and regeneration. We were specifically interested in confirming the year of peak beetle
+        outbreak for the forests within the fire perimeter. We selected points within the perimeter associated with known
+        forested areas that experienced beetle outbreak and conducted a time series analysis on the mean NBR value
+        associated with those points.</p>
+
+    <p style="...; text-align: justify">
+
+        We calculated the differenced normalized burn ratio (dNBR) to characterize various snapshots in time during the
+        sequential disturbances (Key and Benson 2006, Kennedy et al. 2012). We calculated the outbreak severity, burn
+        severity, absolute burn severity, and regrowth. We characterize outbreak severity based on the time series
+        (figure 2), and calculated the difference between peak outbreak conditions and pre-disturbance conditions. Regrowth
+        quantified the change in condition between one-year postfire and the most recent growing season
+        (Kennedy et al. 2012, White et al. 2017). Finally, we quantified regrowth to determine areas that experienced
+        high/low regrowth after short-interval beetle-fire disturbances calculated as a recovery index
+        (Kennedy et al. 2012, White et al. 2017). We calculated the recovery index based on the dNBR from regrowth and
+        the dNBR from the absolute burn severity, which accounted for both beetle outbreak and wildfire.</p>
+
+
+    <div class="image" align="center" style="padding-top: 22px">
+        <img class="img-responsive" src="img/gee1md.png" alt="">
+        <div align="center"><i>Google Earth Engine Interface.</i></div>
+    </div>
+    <br/>
+    <h2 class="h2_about">Design and Program</h2>
+    <p style="...; text-align: justify">
+        &nbsp &nbsp •    Storymap:  Storymap is the core design piece of this website. This storymap is made up by several scenes: Launch Page, Overview, Lodgepole Pine Forests, Beetle Outbreak Severity, Wildfire, Forest Recovery. For each scene, there is a panel with a description and a map with basemap, thematic layers, and interactive features to illustrate the setting.<br>
+        &nbsp &nbsp •    Leaflet: Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps and was used to support the map portion of the storymap.<br>
+        &nbsp &nbsp •    Bootstrap: Offers a framework to line up icons and text that were displayed in the Info scene.<br>
+        &nbsp &nbsp •    Markercluster Photo: This was used to integrate photographs for various aspects of the landscape in the scenes for Outbreak, Wildfire and Recovery. Photos have geo-tags that associates them with specific areas that may exhibit the feature captured in the photo. The photos are shown on the map as clusters of thumbnails, and hovering on each thumbnail opens the image in the left panel.<br>
+        &nbsp &nbsp •    d3 bar-graph: This was used in the Overview scene to display accumulated outbreak mortality from a csv file.<br>
+        &nbsp &nbsp •    color design: Aspects of our color design palette were used in the progress bar. <br>
+        &nbsp &nbsp •    Illustrator: Adobe software was used to design the favicon and resize photos for the website.<br>
+        &nbsp &nbsp •    Font Awesome icons: We used font awesome icons for the Overview scene and the nav bar: location, bug, fire, and github.<br>
+        &nbsp &nbsp •    Google Fonts: Use Google Fonts to define the text fonts(both paragraph and map label).<br>
+    </p>
+
+
+
+    <!--Result-->
+    <!--<h2 class="h2_about">Result</h2>-->
+    <!--<p style="...; text-align: justify">-->
+    <!--<p style="...; text-align: justify">-->
+        <!--</p>-->
+    <hr>
+    <!--Reflection-->
+    <h2 class="h2_about">Reflection on this project</h2>
+    <p style="...; text-align: justify">
+        The project provided an excellent opportunity to apply concepts learn throughout the term in Geovisual Analytics
+        at Oregon State University. This project was a group effort with everything from brainstorming to production of
+        the site. We both had limited experience with web coding, but learned to utilize GitHub and online resources to work together to
+        produce this project. The largest hurdle for this project was integrating remote sensing analyses from Google Earth Engine.
+        We consulted with the faculty advisor for the course and utilized other peoples expertise
+        in the class. <br>
+    </p>
+
+
+
+
+
+    <hr>
+    <!-- Team Members -->
+    <a name="team" style=""></a>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="h2_about">Our Team</h2>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="img/yt1.jpg" alt="">
+                <div class="caption">
+                    <br><br><br><h3>Michael Cook<br>
+                    <small>B.S. | Natural Resources</small>
+                </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="img/Tyy.jpg" alt="">
+                <div class="caption">
+                    <br><br><br><h3>Anna Talucci<br>
+                    <small>PhD | Forest Ecosystems and Society</small>
+                </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="img/bo.jpg" alt="">
+                <div class="caption">
+                    <br><br><br><h3>Dr. Bo Zhao<br>
+                    <small>Course Advisor | Geography</small>
+                </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <hr>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <br>
+                <h2 class="h2_about">Credits</h2>
+                <p style="text-align:justify">
+                    &nbsp &nbsp •	Geographic Data: Fire Perimeters, Outbreak Severity, Provincial Parks acquired from <a href="https://data.gov.bc.ca/">Data BC</a>.<br>
+                    &nbsp &nbsp •	Remote Sensing Data: Landsat Data from <a href="https://landsat.usgs.gov/">USGS</a> and processed in <a href="https://earthengine.google.com/">Google Earth Engine</a>.<br>
+                    &nbsp &nbsp •	Context: Peer reviewed research, field work, and analyses.<br>
+                    &nbsp &nbsp •	Photos: Theodore Temperli, Anna Talucci<br>
+                    &nbsp &nbsp •	Favicon: a combination of fab fa-gripfire and fas fa-bug that were acquired from https://fontawesome.com/icons<br>
+                    &nbsp &nbsp •	Graph data: Wulder et al. 2009<br>
+                    &nbsp &nbsp •	Video: Adobe Spark Software used to produce Launch Page photo slide show<br>
+                </p>
+                <hr>
+                <h2 class="h2_about">Acknowledgement</h2>
+                <p style="text-align:justify">
+                    We would like to thank Dr.Bo Zhao for comments, assistance, and editorial advice.<br>
+                </p>
+                <hr>
+                <h2 class="h2_about">References</h2>
+                <p>
+
+                    [1] Coops, N. C., M. a. Wulder, and J. C. White. 2006. Integrating remotelysensed and ancillary data sources to characterize a mountain pine beetle infestation. Remote Sensing of Environment 105:83–97.<br>
+
+                    [2] Frazier, R. J., N. C. Coops, M. A. Wulder, T. Hermosilla, and J. C. White.2018. Analyzing spatial and temporal variability in short-term rates of post-fire vegetation return from Landsat time series. Remote Sensing ofEnvironment 205:32–45.<br>
+
+                    [3] Kennedy, R. E., Z. Yang, W. B. Cohen, E. Pfaff, J. Braaten, and P. Nelson.2012. Spatial and temporal patterns of forest disturbance and regrowth with in the area of the Northwest Forest Plan. Remote Sensing of Environment122:117–133.<br>
+
+                    [4] Key, C. H., and N. C. Benson. 2006. Landscape assessment (LA): Samplingand analysis methods. USDA Forest Service General Technical ReportRMS-GTR-164-CD:1–55.<br>
+
+                    [5] Kurz, W. a, Dymond, C. C., Stinson, G., Rampley, G. J., Neilson, E. T., Carroll, a L., … Safranyik, L. (2008). Mountain pine beetle and forest carbon feedback to climate change. Nature, 452(April), 987–990. https://doi.org/10.1038/nature06777<br>
+
+                    [6] Meigs, G. W., R. E. Kennedy, and W. B. Cohen. 2011. A Landsat time seriesapproach to characterize bark beetle and defoliator impacts on tree mortality and surface fuels in conifer forests. Remote Sensing of Environment115:3707–3718.<br>
+
+                    [7] Pickell, P. D., T. Hermosilla, R. J. Frazier, N. C. Coops, and M. A.Wulder. 2016. Forest recovery trends derived from Landsat time series for NorthAmerican boreal forests. International Journal of Remote Sensing 37:138–149.<br>
+
+                    [8] Roy, D. P., V. Kovalskyy, H. K. Zhang, E. F. Vermote, L. Yan, S. S. Kumar,and A. Egorov. 2016. Characterization of Landsat-7 to Landsat-8 reflective wavelength and normalized difference vegetation index continuity. RemoteSensing of Environment 185:57–70.<br>
+
+                    [9] White, J. C., M. A. Wulder, T. Hermosilla, N. C. Coops, and G. W. Hobart.2017. A nationwide annual characterization of 25 years of forest disturbance and recovery for Canada using Landsat time series. Remote Sensing of Environment 194:303–321.<br>
+
+                    [10] Wulder, M. a., C. C. Dymond, J. C. White, D. G. Leckie, and A. L. Carroll.2006. Surveying mountain pine beetle damage of forests: A review of remote sensing opportunities. Forest Ecology and Management 221:27–41.<br>
+
+                    [11] Wulder, M. A., White, J. C., Grills, D., Nelson, T., & Coops, N. C. (2009). Aerial overview survey of the mountain pine beetle epidemic in British Columbia: Communication of impacts. BC Journal of Ecosystems and Management, 10(1), 45–58.<br>
+
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+
+</html>

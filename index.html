@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dead forest burning</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="img/carticon2.ico" type="image/x-icon">
+
+    <!--meta data for sharing links on Facebook-->
+    <meta property="og:title" content="Dead forests burning"/>
+    <!--<meta property="og:url" content=""/>-->
+    <meta property="og:description" content="Practice generating a story map."/>
+    <meta property="og:image" content="img/social.png"/>
+
+    <!--add required stylesheets-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--boostrap-->
+
+    <!--leaflet css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <link rel="stylesheet" href="https://turban.github.io/Leaflet.Photo/examples/lib/cluster/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://turban.github.io/Leaflet.Photo/Leaflet.Photo.css" />
+
+
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/storymap.2.4.css">
+
+
+
+
+    <!--Scripts-->
+    <!--add required libraries-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+    <!--jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--boostrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    http://turban.github.io/Leaflet.Photo/examples/lib/cluster/leaflet.markercluster.js
+    <script src="js/leaflet.markercluster-src.js"></script>
+    <script src="https://turban.github.io/Leaflet.Photo/Leaflet.Photo.js"></script>
+
+
+    <!--leaflet.ajax for asynchronously adding geojson data-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+    <!--story map plugin-->
+    <script src="js/storymap.2.4.js"></script>
+
+    <!-- mini globle map -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+    <!--<script src="js/globeminimap.js"></script>-->
+    <script src="js/data.js"></script>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark storymap-navbar">
+    <a class="navbar-brand" href="index.html">
+        <img src="img/carticon2.ico" width="100%" class="inline-block">
+        <!--convert the style value to a class and then add the class to the css file.-->
+        <!--<img src="img/logo.png" class="d-inline-block align-top">-->
+        <b>Dead Forests Burning</b>
+    </a>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+        <!--Create class ml-auto for the navbar items you want on the right.-->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" "="" href="javascript:window.scrollBy(0, $('section[data-scene=\'info\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" "="" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene0\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" "="" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene1\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Pine</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" "="" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene2\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Outbreak</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" "="" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene3\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Wildfire</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" "="" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene4\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Recovery</a>
+            </li>
+            <li class="nav-link" >
+
+                <a style = "color: gray" href="about.html" target="_blank"><b>About</b></a>
+            </li>
+            <li class="nav-link">
+                <a class="fab fa-facebook-square" style = "color: gray" href="https://facebook.com/sharer.php?u=https://taluccia.github.io/beetlefire/index.html" target="_blank"></a>
+            </li>
+            <li class="nav-link">
+                <a class="fab fa-github" style = "color: gray" href=" https://github.com/taluccia/beetlefire" style="top:40px" target="_blank" ></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+<div id="storymap" class="container-fluid">
+    <div class="row">
+        <div class="storymap-story">
+
+            <section data-scene="overview" data-background="assets/video_endTrim.mp4">
+                <div class="fullscreen text-center">
+
+                    <h1>Dead Forests Burning</h1>
+                    <br/>
+                    <br/>
+                    <h6 style="color:white; font-size: 20px"> The most recent Mountain Pine Beetle Outbreak has affect over 18 million hectares of forests in British Columbia. <br/>
+                        This epidemic has raised concerns for land managers regarding potential for extreme wildfire behavior, wildfire severity, and forest resiliency.</h6>
+                </div>
+            </section>
+
+            <section data-scene="info" data-background="img/aerialphoto1.png">
+                <div class="fullscreen text-center scene-title text-responsive img-responsive">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p style="color:white; font-size: 30px; margin-left: 5%; margin-right: 5%">Forest in the central interior of British Columbia, Canada are accustom to beetle outbreaks and wildfire.
+                    However, the most recent outbreak produced unprecedented mortality, and created a forest legacy that will be present for decades to come.</p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="container">
+                        <div class="row text-center index-icon" style="margin-left: 15%">
+                            <div class="col-md-3 col-sm-3">
+                           <span class="fa-stack fa-4x">
+                              <i class="fas fa-map-marker fa-stack-2x text-primary"></i>
+                           </span>
+                                <h4 style="color:white">
+                                    Location
+                                </h4>
+                                <p class="description" style="color:white">British Columbia</p>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                           <span class="fa-stack fa-4x">
+                              <i class="fa fa-bug fa-stack-2x text-primary"></i>
+                           </span>
+                                <h4 style="color:white">
+                                    Outbreak
+                                </h4>
+                                <p class="description" style="color:white">18 million hectares</p>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                           <span class="fa-stack fa-4x">
+                           <i class="fa fa-fire fa-stack-2x text-primary"></i>
+                           </span>
+                                <h4 style="color:white">
+                                    Wildfire
+                                </h4>
+                                <p class="description" style="color:white">140,000 hectares</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <p style="color:white; font-size: 25px; margin-left: 5%; margin-right: 5%">These forest have both economic and intrinsic value.<br>
+                        &nbsp &nbsp • A loss of over 50% <strong>merchantable timber</strong> since the onset of the beetle outbreak<br>
+                        &nbsp &nbsp • Declines in <strong>recreation</strong> affecting local economies<br>
+                        &nbsp &nbsp • Forest once served as <strong>carbon sinks</strong><br>
+                        &nbsp &nbsp • Now forests are a net <strong>carbon source</strong> that will release an ~270 megatonnes of carbon between 2000-2020 (Kurz et al. 2008).<br>
+                        &nbsp &nbsp • Changes in forest fuels have raised <strong>management concerns</strong> about the potential fire severity and forest resiliency.<br></p>
+                    <br/>
+                    <p style="color:white; font-size: 30px; margin-left: 5%; margin-right: 5%"><strong>Because of the
+                        extent of the outbreak it is not a question of if these forest will burn but when.</strong> </p>
+
+                    <!--<p style="color:white; font-size: 30px; margin-left: 5%; margin-right: 5%">These forest have both economic and intrinsic value. Timber industry has experienced a loss of-->
+                        <!--over 50% <strong>merchantable timber</strong> since the onset of the beetle outbreak. <strong>Recreation</strong> has declined for local outfitters.-->
+                        <!--These forest once served as <strong>carbon sinks</strong>, sequestering carbon from the atmosphere, and now these forests are a net <strong>carbon source</strong>,-->
+                        <!--which will release an estimated 270 megatonnes of carbon between 2000-2020 (Kurz et al. 2008).-->
+                        <!--The alterations of in forest structure, in particular fuel structure, composition, and type, have raised <strong>management concerns</strong>-->
+                        <!--about the potential severe fire behavior, increased fire severity, and overall forest resiliency.</p>-->
+                    <!--<p style="color:white; font-size: 30px; margin-left: 5%; margin-right: 5%"><strong>Because of the-->
+                        <!--extent of the outbreak it is not a question of if these forest will burn but when.</strong> </p>-->
+                </div>
+            </section>
+
+            <section data-scene="scene0" >
+                <div>
+                <h2>Overview</h2>
+                <p>This overview of outbreak severity, wildfire severity, and forest recovery is centered on three fires
+                    that burned in Tweedsmuir and Entiako provincial parks.
+                    Although the outbreak is widespread, due to the active and pervasive forest harvest tenures in
+                    central interior, this region and these fires provided a rare opportunity to study beetle-fire
+                    interactions without the interference of salvage logging and forest management.</p>
+                <p>The last major wildfires in the region occurred between 1880 and 1920, which has allowed Lodgepole pine to mature over the last century.
+                    The combination of abundant mature lodgepole pine and warmer winters associated with anthropogenic climate change have resulted in 50-100%
+                    lodgepole pine mortality in Tweedsmuir and Entiako Provincial Parks, and over 18 million hectares of forest with tree mortality.</p>
+                <br>
+                <hr>
+                <!--<div id="map" class="map"></div>-->
+                <!--info panel-->
+                <div class="info-panel">
+                    <!-- legend patch items -->
+                    <table style="width:100%">
+                        <tr>
+                            <td> <i style="background: red;"></i><p>Beetle Outbreak</p></td>
+                            <td> <i style="background: green;"></i><p>Provincial Parks</p></td>
+                            <td> <i style="background: orange;"></i><p>Wildfire</p></td>
+                        </tr>
+                    </table>
+                    <hr>
+                </div>
+                </div>
+
+                <div class="leaflet-center leaflet-right">
+                    <div class="col-med-2 col-sm-2">
+                        <head>
+                            <style>
+                                .axis .domain {
+                                    display: none;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                        <svg width="400" height="400"></svg>
+                        <script src="https://d3js.org/d3.v4.min.js"></script>
+
+                        <script>
+                            var svg = d3.select("svg"),
+                                margin = {top: 20, right: 20, bottom: 30, left: 40},
+                                width = +svg.attr("width") - margin.left - margin.right,
+                                height = +svg.attr("height") - margin.top - margin.bottom,
+                                g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                            var x0 = d3.scaleBand()
+                                .rangeRound([0, width])
+                                .paddingInner(0.1);
+                            var x1 = d3.scaleBand()
+                                .padding(0.05);
+                            var y = d3.scaleLinear()
+                                .rangeRound([height, 0]);
+                            var z = d3.scaleOrdinal()
+                                .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+                            d3.csv("assets/areadat.csv", function(d, i, columns) {
+                                for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
+                                return d;
+                            }, function(error, data) {
+                                if (error) throw error;
+                                var keys = data.columns.slice(1);
+                                x0.domain(data.map(function(d) { return d.year; }));
+                                x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+                                y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d[key]; }); })]).nice();
+                                g.append("g")
+                                    .selectAll("g")
+                                    .data(data)
+                                    .enter().append("g")
+                                    .attr("transform", function(d) { return "translate(" + x0(d.year) + ",0)"; })
+                                    .selectAll("rect")
+                                    .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
+                                    .enter().append("rect")
+                                    .attr("x", function(d) { return x1(d.key); })
+                                    .attr("y", function(d) { return y(d.value); })
+                                    .attr("width", x1.bandwidth())
+                                    .attr("height", function(d) { return height - y(d.value); })
+                                    .attr("fill", function(d) { return z(d.key); });
+                                g.append("g")
+                                    .attr("class", "axis")
+                                    .attr("transform", "translate(0," + height + ")")
+                                    .call(d3.axisBottom(x0));
+                                g.append("g")
+                                    .attr("class", "axis")
+                                    .call(d3.axisLeft(y).ticks(null, "s"))
+                                    .append("text")
+                                    .attr("x", 2)
+                                    .attr("y", y(y.ticks().pop()) + 0.5)
+                                    .attr("dy", "0.32em")
+                                    .attr("fill", "#000")
+                                    .attr("font-weight", "bold")
+                                    .attr("text-anchor", "start")
+                                    .text("Millions of Hectares");
+                                var legend = g.append("g")
+                                    .attr("font-family", "sans-serif")
+                                    .attr("font-size", 12)
+                                    .attr("text-anchor", "end")
+                                    .selectAll("g")
+                                    .data(keys.slice().reverse())
+                                    .enter().append("g")
+                                    .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+                                legend.append("rect")
+                                    .attr("x", width - 190)
+                                    .attr("y", height - 250)
+                                    .attr("width", 12)
+                                    .attr("height", 12)
+                                    .attr("fill", z);
+                                legend.append("text")
+                                    .attr("x", width - 195)
+                                    .attr("y", 105)
+                                    .attr("dy", "0.32em")
+                                    .text(function(d) { return d; });
+                            });
+                        </script>
+
+
+                        </body>
+
+
+                    </div>
+                </div>
+
+            </section>
+
+
+            <section data-scene="scene1">
+                <h2>Lodgepole Pine Forests</h2>
+                <p>Sub-boreal forests cover vast areas in central interior British Columbia. Forests provide vital services across the region.
+                    The forests provide economic value in terms of <strong>timber harvest</strong>. They provide ecosystems services such as <strong>carbon sequestration</strong> and watershed management.
+                    Forests provide critical <strong>wildlife habitat</strong>.  </p>
+
+                <p>Lodgepole pine are dominant species in the forests of the central interior. Historically, forest life
+                    cycles are influenced by disturbance regimes of <strong>wildfire</strong> and <strong>beetle outbreaks</strong>.
+                    wildfire return is typically 100-150 year intervals. Wildfire results in tree mortality and forest initiation.
+                    It diversifies the landscape by initiating <strong>early successional habitat</strong>.</p>
+                <p> Mountain pine beetle are <strong>endemic</strong> to North American forest often killing older, weaker trees, which create canopy gaps.
+                    Outbreak conditions are associated with <strong>eruptions in beetle population</strong> that result in large tree mortality events. </p>
+                <br>
+                <hr>
+                <!--<div id="map" class="map"></div>-->
+                <!--info panel-->
+                <div class="info-panel">
+                    <!-- legend patch items -->
+                    <table style="width:100%">
+                        <tr>
+                            <td> <i style="background: #2d6f8e;"></i><p>Lodgepole Pine</p></td>
+                            <td> <i style="background: #c2e023;"></i><p>Spruce Hybrid</p></td>
+                            <td> <i style="background: #85d54a;"></i><p>White Spruce</p></td>
+                        </tr>
+                        <tr>
+                            <td> <i style="background: #1e9b89;"></i><p>Spruce</p></td>
+                            <td> <i style="background: #482173;"></i><p>Aspen</p></td>
+                            <td><i style="background: green;"></i><p>Forest</p></td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <div class="embeded-photo img-responsive img-thumbnail"></div>
+                </div>
+            </section>
+
+            <section data-scene="scene2">
+                <h2>Beetle Outbreak Severity</h2>
+                <p>Mountain pine beetles are a natural part of forest ecosystems in western North America. Lodgepole
+                    pine trees are the <strong>primary host</strong> for mountain pine beetles. Warmer winters and and abundance of
+                    mature lodgepole pine trees have created ideal conditions for the eruption in beetle populations
+                    that have resulted in millions of hectares of tree mortality.</p>
+                <p> The <strong>epicenter</strong> of the beetle outbreak occurred in the central interior of British Columbia.
+                    Beetles have killed 50-100% of mature lodgepole pine. Forest regeneration is slow in the wake of the
+                    beetle outbreak, because pines continue to hold seeds in sealed <strong>serotinous cones</strong> awaiting the heat from wildfire.
+                    </p>
+                <hr>
+                <!--<div id="map" class="map"></div>-->
+                <!--info panel-->
+                <div class="info-panel">
+                    <table style="width:100%">
+                        <tr>
+                            <td> <i style="background: #ffffb2;"></i><p>Low Mortality</p></td>
+                            <td> <i style="background: #feb751;"></i><p>Moderate Mortality</p></td>
+                            <td> <i style="background: #f55629;"></i><p>High Mortality</p></td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <div class="embeded-photo img-responsive img-thumbnail"></div>
+                </div>
+            </section>
+
+
+
+            <section data-scene="scene3">
+                <h2>Wildfire Severity</h2>
+                <p>Wildfires is often associated with initiating new growth for lodgepole pine forests. These ecosystems are often reliant on
+                    wildfire to release seeds from <strong>fire cue serotinous cones</strong> that are held in tree canopies.
+                    Without wildfire, cones retain seeds and new growth is limited.</p>
+                <p> These landscapes tend to be characterized by stand replacing fire when forest are alive at time of fire.
+                    When dead forests burn much of the landscape is still characterized by moderate to high severity fire,
+                    based on this burn severity map generated from Landsat imagery.</p>
+                <p>The post fire <strong>burn mosaic</strong> with diversify the composition and structure of the landscape</p>
+                <hr>
+                <!--<div id="map" class="map"></div>-->
+                <!--info panel-->
+                <div class="info-panel">
+                    <table style="width:100%">
+                        <tr>
+                            <td> <i style="background: #1A9641;"></i><p>Unburned</p></td>
+                            <td> <i style="background: #FFFF33;"></i><p>Light Surface Fire</p></td>
+                        </tr>
+                        <tr>
+                            <td> <i style="background: #FFA500;"></i><p>Severe Surface Fire</p></td>
+                            <td> <i style="background: #D7191C;"></i><p>Severe Crown Fire</p></td>
+                        </tr>
+                    </table>
+                    <span>Source:</span><a href="https://www.fs.fed.us/postfirevegcondition/documents/publications/FIREMON_LandscapeAssessment.pdf">Burn Severity</a>
+                    <hr>
+                    <div class="embeded-photo img-responsive img-thumbnail"></div>
+
+                </div>
+            </section>
+
+
+
+            <section data-scene="scene4">
+                <h2>Early Succession</h2>
+                <p>Forest <strong>resiliency</strong> has been a concern for land managers when dead forest from beetle outbreak burn during wildfire.
+                    Although some areas have low seedling recruitment, generally <strong>wildfire</strong> is a <strong>good mechanism</strong> to release
+                    seeds and allow the forest to regenerate.</p>
+                <p>Field work has show some influence of outbreak conditions on seedling recruitment. Here we are using
+                    Landsat imagery to characterize forest recovery after sequential disturbances of beetle outbreak and wildfire. </p>
+                <p> Wildfire initiates a variety of plant growth either by cuing seedbanks and/or freeing up available resources.
+                    The beauty of the post fire landscape presents itself in both plant life and wildlife. The influx of
+                    herbaceous plants such as <strong>fireweed</strong> and <strong>Geranium bicknellii</strong> attract <strong>humming birds</strong>, while increased insect
+                    and charred trees provide both food and shelter for <strong>black backed woodpeckers</strong>.</p>
+
+                <hr>
+                <!--<div id="map" class="map"></div>-->
+                <!--info panel-->
+                <div class="info-panel">
+                    <h5> Vegetative Recovery Rate </h5>
+                    <!-- legend patch items -->
+                    <table style="width:100%">
+                        <tr>
+                            <td> <i style="background: #a6611a;"></i><p>Unchanged</p></td>
+                            <td> <i style="background: #e7d3a5;"></i><p>Low recovery Rate</p></td>
+                        </tr>
+                        <tr>
+                            <td> <i style="background: #a7dbd3;"></i><p>Moderate Recovery Rate</p></td>
+                            <td> <i style="background: #018571;"></i><p>High Recovery Rate</p></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div class="embeded-photo img-responsive img-thumbnail"></div>
+            </section>
+
+
+
+            <section data-scene="end" data-background="img/fire_tetachuck.jpg">
+                <div class="fullscreen text-center img-responsive">
+                    <div class= "end-background-img background-fullscreen-setting text-responsive">
+                        <p class ="end">
+                            Wildfire breaths new life into forest killed by beetle outbreak. Post wildfire early
+                            succession produces an influx of new plant species that attract and provide food and habitat for a diversity of
+                            species including blacked backed wood peckers, humming birds, and grizzly bears. Lodgepole pine regeneration
+                            may vary across the landscape but is generally resilient because wildfire releases seeds that are held in cones
+                            after trees were killed by beetles.</p>
+                        <div class="endcredit">
+                            <!--<p><img style="width:180px;" align="right" src="img/end1.png"></p> <br/><br/><br/>-->
+                            <p>Created by Michael Cook and Anna Talucci from Oregon State University</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!--map div-->
+        <div class="col-sm-6 col-md-8 storymap-map"></div>
+    </div>
+</div>
+
+
+
+<!-- main javascript -->
+<script type="text/javascript">
+
+
+    // Create Legend Contents in html format
+
+    var topoLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri',
+        maxZoom: 13
+    });
+
+
+    var photoLayer1 = L.photo.cluster().on('mouseover', showPhoto);
+    photoLayer1.add(photos1);
+
+    var photoLayer2 = L.photo.cluster().on('mouseover', showPhoto);
+    photoLayer2.add(photos2);
+
+    var photoLayer3 = L.photo.cluster().on('mouseover', showPhoto);
+    photoLayer3.add(photos3);
+
+
+    $("div.embeded-photo").hide();
+
+    function showPhoto (evt) {
+        $("div.embeded-photo").show();
+
+        var photo = evt.layer.photo;
+        $("section.viewing div.embeded-photo").empty().append("<img src='" + photo.url +"' /> <br/> <p class='text-center'> " +  photo.caption +" <p>");
+
+    }
+
+
+
+
+    var layers = {
+        ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},
+
+        topo: {layer: topoLayer},
+
+        photo1: {layer: photoLayer1},
+
+        photo2: {layer: photoLayer2},
+
+        photo3: {layer: photoLayer3},
+
+        parks: {layer: L.geoJson.ajax('assets/parks.geojson', {
+                color: 'green',
+                weight: 0,
+                opacity: 0.7
+            }),
+        },
+
+        fire: {layer: L.geoJson.ajax('assets/fire.perimeters.geojson', {
+                color: 'orange',
+                weight: 2,
+                opacity: 0.7
+            }),
+        },
+
+        mpb: {layer: L.geoJson.ajax('assets/2005_beetlearea3.geojson', {
+                color: 'red',
+                weight: 0,
+                opacity: 0.7
+            }),
+        },
+        beetle: {layer: L.tileLayer('assets/tilesoutbreak/{z}/{x}/{y}.png')},
+
+        vri: {layer: L.tileLayer('assets/tilesvir/{z}/{x}/{y}.png')},
+
+        GEE: {
+            layer: L.tileLayer('http://earthengine.google.org/static/hansen_2013/tree_alpha/{z}/{x}/{y}.png')
+
+        },
+
+        burn: {
+            layer: L.tileLayer('assets/tilesburn/{z}/{x}/{y}.png')
+
+        },
+        recovery: {
+            layer: L.tileLayer('assets/tilesrecovery/{z}/{x}/{y}.png')
+
+        },
+        cartodb_light: {layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png')}
+    };
+
+    var scenes = {
+        overview: {lat: 53.248971, lng: -125.644940, zoom: 7, name: 'Cover Page', layers: []},
+        info: {lat: 53.248971, lng: -125.644940, zoom: 7, name: 'Overview', layers: []},
+        scene0: {lat: 52.59826, lng: -125.69520, zoom: 7, name: 'Overview', layers: [layers.mpb, layers.parks, layers.fire]},
+        scene1: {lat: 53.271870, lng: -125.982894, zoom: 10, name: 'Lodgepole Pine Forests', layers: [layers.vri]},
+        scene2: {lat: 53.271870, lng: -125.982894, zoom: 10, name: 'Beetle Outbreak', layers: [layers.beetle, layers.photo1]},
+        scene3: {lat: 53.271870, lng: -125.982894, zoom: 10, name: 'Wildfire', layers: [layers.ESRI, layers.burn, layers.photo2]},
+        scene4: {lat: 53.271870, lng: -125.982894, zoom: 10, name: 'Forest Regeneration', layers: [layers.ESRI, layers.recovery, layers.photo3]},
+        end: {lat: 53.248971, lng: -125.644940, zoom: 7, name: 'The End', layers: []}
+    };
+
+    $('#storymap').storymap({
+        scenes: scenes,
+        baselayer: layers.cartodb_light,
+        legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
+        credits: "",
+        navbar: false,
+        loader: true,
+        scalebar: false,
+        flyo: true,
+        navwidget: true,
+        mapinteraction:false,
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+            var map = L.map($(".storymap-map")[0], {
+                zoomControl: false, scrollWheelZoom: false, fadeAnimation: true,
+                zoomAnimation: true
+            }).setView([53, -125.5], 7);
+
+
+            return map;
+        }
+    });
+</script>
+</body>
+
+</html>
+
