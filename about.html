@@ -95,7 +95,7 @@
                 <a class="fab fa-facebook-square" style = "color: gray" href="https://facebook.com/sharer.php?u=https://taluccia.github.io/beetlefire/index.html" target="_blank"></a>
             </li>
             <li class="nav-link">
-                <a class="fab fa-github" style = "color: gray" href="https://taluccia.github.io/beetlefire/" style="top:40px" target="_blank" ></a>
+                <a class="fab fa-github" style = "color: gray" href="https://github.com/taluccia/beetlefire" style="top:40px" target="_blank" ></a>
             </li>
         </ul>
     </div>
@@ -178,8 +178,9 @@
 
     <p style="...; text-align: justify">
         The purpose of this story map was to visualize various aspects of forest composition and structure through time
-        to describe current disturbances for a research area. Aspects of this website are a product of remotes sensing
-        analyses performed in Google Earth Engine and elaborated on below. </p>
+        as a function of beetle outbreak and wildfire for three fires that burned in Tweedsmuir and Entiako Provincial Parks.
+        Aspects of this website are a product of remotes sensing
+        analyses performed in Google Earth Engine. Remote sensing analyses methods are elaborated on below. </p>
 
     <p style="...; text-align: justify">
         We used imagery from Landsat 5, 7, and 8, from 1997 through 2017 surface reflectance (Key and Benson 2006) and
@@ -193,35 +194,23 @@
         Trends in forest health can be characterized well using the normalized burn ratio (NBR), which is well documented
         (Coops et al. 2006, Meigs et al. 2011, Kennedy et al. 2012, Pickell et al. 2016, White et al. 2017,
         Frazier et al. 2018). Research has primarily focused on detecting and evaluating singular broad-scale disturbance
-        agents such as insect outbreaks, wildfires, and timber harvest (Coops et al. 2006, Kennedy et al. 2012, White et al.
+        agents such as insect outbreaks, wildfires, or timber harvest (Coops et al. 2006, Kennedy et al. 2012, White et al.
         2017, Frazier et al. 2018). These research approaches have been demonstrated as robust means of evaluating
         broad-scale disturbances such as insect outbreaks and wildfire. Effects of sequential disturbances of beetle
         outbreak and wildfire have yet to be evaluated in the central interior. Our broad overarching question is, what
         effect do beetle outbreak conditions have on fire severity and regeneration at landscape scales? The goal of this
-        project is to conduct exploratory research on a single fire event that burned through beetle outbreak affected
-        forests in the region. Our objectives are twofold: first to generate a time series for the region showing the
+        project is to conduct exploratory research on three fire event that burned through beetle outbreak affected
+        forests in wilderness areas. Our objectives are twofold: first to generate a time series for the region showing the
         decline in forest health from the outbreak followed by subsequent fire and a brief snapshot of recovery
         (Meigs et al. 2011, Kennedy et al. 2012). Second, to develop a series of disturbance and regrowth maps to
         characterize the amount of change (Kennedy et al. 2012, White et al. 2017, Frazier et al. 2018).</p>
-    <p style="...; text-align: justify">
-
-        We used the time series analysis to determine changes in forest health and condition associated with the regional
-        beetle outbreak, wildfire, and regeneration. We were specifically interested in confirming the year of peak beetle
-        outbreak for the forests within the fire perimeter. We selected points within the perimeter associated with known
-        forested areas that experienced beetle outbreak and conducted a time series analysis on the mean NBR value
-        associated with those points.</p>
 
     <p style="...; text-align: justify">
 
-        We calculated the differenced normalized burn ratio (dNBR) to characterize various snapshots in time during the
-        sequential disturbances (Key and Benson 2006, Kennedy et al. 2012). We calculated the outbreak severity, burn
-        severity, absolute burn severity, and regrowth. We characterize outbreak severity based on the time series
-        (figure 2), and calculated the difference between peak outbreak conditions and pre-disturbance conditions. Regrowth
-        quantified the change in condition between one-year postfire and the most recent growing season
-        (Kennedy et al. 2012, White et al. 2017). Finally, we quantified regrowth to determine areas that experienced
-        high/low regrowth after short-interval beetle-fire disturbances calculated as a recovery index
-        (Kennedy et al. 2012, White et al. 2017). We calculated the recovery index based on the dNBR from regrowth and
-        the dNBR from the absolute burn severity, which accounted for both beetle outbreak and wildfire.</p>
+        We calculated the differenced normalized burn ratio (dNBR) to characterize various snapshots in time during
+        sequential disturbances (Key and Benson 2006, Kennedy et al. 2012). We calculated burn severity and regrowth.
+        Regrowth quantified the change in condition between one-year postfire and the most recent growing season
+        (Kennedy et al. 2012, White et al. 2017).</p>
 
 
     <div class="image" align="center" style="padding-top: 22px">
@@ -231,12 +220,17 @@
     <br/>
     <h2 class="h2_about">Design and Program</h2>
     <p style="...; text-align: justify">
-        &nbsp &nbsp •    Storymap:  Storymap is the core design piece of this website. This storymap is made up by several scenes: Launch Page, Overview, Lodgepole Pine Forests, Beetle Outbreak Severity, Wildfire, Forest Recovery. For each scene, there is a panel with a description and a map with basemap, thematic layers, and interactive features to illustrate the setting.<br>
+        &nbsp &nbsp •    Storymap:  Storymap is the core design piece of this website and is made up by several scenes:<br>
+        &nbsp &nbsp &nbsp &nbsp • Launch Page, Overview, Lodgepole Pine Forests, Beetle Outbreak Severity, Wildfire, Forest Recovery.<br>
+        &nbsp &nbsp &nbsp &nbsp • For each scene, there is a panel with a description and a map with basemap, thematic layers, and interactive features to illustrate the setting.<br>
         &nbsp &nbsp •    Leaflet: Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps and was used to support the map portion of the storymap.<br>
         &nbsp &nbsp •    Bootstrap: Offers a framework to line up icons and text that were displayed in the Info scene.<br>
-        &nbsp &nbsp •    Markercluster Photo: This was used to integrate photographs for various aspects of the landscape in the scenes for Outbreak, Wildfire and Recovery. Photos have geo-tags that associates them with specific areas that may exhibit the feature captured in the photo. The photos are shown on the map as clusters of thumbnails, and hovering on each thumbnail opens the image in the left panel.<br>
+        &nbsp &nbsp •    Markercluster Photo: This was used to integrate photographs for various aspects of the landscape. <br>
+        &nbsp &nbsp &nbsp &nbsp • Photos are used in the scenes for Outbreak, Wildfire and Recovery.<br>
+        &nbsp &nbsp &nbsp &nbsp • Photos have geo-tags that associates them with specific areas that may exhibit the feature captured in the photo. <br>
+        &nbsp &nbsp &nbsp &nbsp • The photos are shown on the map as clusters of thumbnails, and hovering on each thumbnail opens the image in the left panel.<br>
         &nbsp &nbsp •    d3 bar-graph: This was used in the Overview scene to display accumulated outbreak mortality from a csv file.<br>
-        &nbsp &nbsp •    color design: Aspects of our color design palette were used in the progress bar. <br>
+        &nbsp &nbsp •    Color design: Aspects of our color design palette were used in the progress bar. <br>
         &nbsp &nbsp •    Illustrator: Adobe software was used to design the favicon and resize photos for the website.<br>
         &nbsp &nbsp •    Font Awesome icons: We used font awesome icons for the Overview scene and the nav bar: location, bug, fire, and github.<br>
         &nbsp &nbsp •    Google Fonts: Use Google Fonts to define the text fonts(both paragraph and map label).<br>
