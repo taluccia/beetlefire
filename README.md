@@ -46,7 +46,7 @@ We used a story map layout
 
 #### Color Scheme
 
-We generated out color scheme using a photograph in coolors.co
+We generated our color scheme using a photograph in coolors.co
 
  
 
