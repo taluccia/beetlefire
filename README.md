@@ -60,9 +60,9 @@ We generated out color scheme using a photograph in coolors.co
 
 Then used coolors.com.
 
-**[Color Scheme](https://coolors.co/export/png/acc4dd-39381a-59584f-bfb085-757f92)**
+**[Color Scheme](https://coolors.co/acc4dd-39381a-59584f-bfb085-757f92)**
 
-![color scheme from coolors](N:/geog4572.proposal.taluccia/images/acc4dd-39381a-59584f-bfb085-757f92.png)
+![color scheme from coolors](img/coolorpalette.png)
 
 
 
@@ -139,7 +139,7 @@ Scripts:
 
 ### Credits
 
--  Geographic Data: Fire Perimeters, Outbreak Severity, Provincial Parks acquired from **[https://data.gov.bc.ca/](Data BC)**
+- Geographic Data: Fire Perimeters, Outbreak Severity, Provincial Parks acquired from **[https://data.gov.bc.ca/](Data BC)**
 - Remote Sensing Data: Landsat Data from <a href="https://landsat.usgs.gov/">USGS</a> and processed in **[https://earthengine.google.com/](Google Earth Engine)**
 - Context: Peer reviewed research, field work, and analyses
 - Photos: Theodore Temperli, Anna Talucci
