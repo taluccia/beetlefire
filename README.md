@@ -4,24 +4,13 @@
 
 **Title:** Dead Forests Burning
 
-**Group Members:**
 
-- Michael Cook
-- Dominique Bachelet
-- Anna Talucci
 
 **Description:**
 
-This is a web map of lodgepole pine forest in transition with an overview of outbreak severity, burn severity, and forest recovery for a section of the landscape in central interior British Columbia. Forests have experienced unprecedented mortality from the recent mountain pine beetle outbreak and subsequently burned during wildfire. Land managers have been concerned about dead forest conditions and the influence dead forests may have on fire behavior and forest resiliency. This project is an overview
-of a large dissertation project. The composition of this site serves as a final project for class:
-Geovisualization provided by Oregon State University.
+This repository contains code and supporting items central to the story map link below. The composition of this site serves as a final project for class: Geovisualization provided by Oregon State University.
 
-**Goal:**
-
-
-
-
-
+This [story map](https://taluccia.github.io/beetlefire/index.html) visualizes maps, data, and images about how forest burn when wildfire is preceded by substantial tree mortality events from bark beetle outbreaks.
 
 
 **Technical summary:**
@@ -32,10 +21,13 @@ Geovisualization provided by Oregon State University.
 - Remote sensing analysis from google earth engine platform (see file GEE_sample)
 - Spatial data could include: fire perimeters, provincial park boundaries, biogeoclimatic zones, tree species (spatial data file only includes fire perimeters for now)
 
+**Group Members:**
 
+- Michael Cook
+- Dominique Bachelet
+- Anna Talucci
 
 **Interface Sketch:**
-
 
 
 ![Alt Text](https://github.com/taluccia/geog4572.proposal.taluccia/blob/master/images/sketchpg1.JPG?raw=true)
