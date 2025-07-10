@@ -50,7 +50,7 @@ We generated our color scheme using a photograph in coolors.co
 
  
 
-![image color](N:/geog4572.proposal.taluccia/images/coolorsimage.PNG)
+![image color](img/aerialphoto1.PNG)
 
 
 
