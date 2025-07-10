@@ -50,7 +50,7 @@ We generated our color scheme using a photograph in coolors.co
 
  
 
-![image color](img/aerialphoto1.PNG)
+![image color](img/aerialphoto1.png)
 
 
 
